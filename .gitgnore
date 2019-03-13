@@ -5,8 +5,8 @@
 .settings/
 
 .loadpath
-bin/
-out/
+/bin/
+/out/
 
 *.class
 
