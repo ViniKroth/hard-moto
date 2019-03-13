@@ -1,0 +1,15 @@
+CREATE KEYSPACE hardmoto
+  WITH REPLICATION = {
+   'class' : 'SimpleStrategy',
+   'replication_factor' : 1
+  };
+
+
+
+CREATE TABLE hardmoto.city (
+   id varint,
+   name text,
+   distance decimal,
+   destination_id varint,
+   PRIMARY KEY((id, destination_id))
+ );
