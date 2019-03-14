@@ -1,0 +1,32 @@
+{
+  "variables": {
+     "aws_access_key": "{{env `AWS_ACCESS_KEY_ID`}}",
+     "aws_secret_key": "{{env `AWS_SECRET_ACCESS_KEY`}}",
+  },
+  "builders": [{
+    "type": "amazon-ebs",
+    "access_key": "{{user `aws_access_key`}}",
+    "secret_key": "{{user `aws_secret_key`}}",
+    "region": "us-east-2",
+    "source_ami": "ami-0cd3dfa4e37921605",
+    "instance_type": "t2.micro",
+    "ssh_username": "ec2-user",
+    "ami_name": "cassandra {{timestamp}}"
+  }],
+
+"provisioners": [{
+    "type": "shell",
+    "inline": [
+        "sleep 10",
+        "sudo yum remove -y java",
+        "sudo yum install -y git",
+	"wget --no-cookies --no-check-certificate --header \"Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie\" \"https://download.oracle.com/otn-pub/java/jdk/8u201-b09/42970487e3af4f5aa5bca3f542482c60/jdk-8u201-linux-x64.tar.gz\"",
+	"rm -rf jdk-8u201-linux-x64.tar.gz",
+        "wget https://archive.apache.org/dist/cassandra/3.11.2/apache-cassandra-3.11.2-bin.tar.gz",
+	"tar -xzvf apache-cassandra-3.11.2-bin.tar.gz",
+        "apache-cassandra-3.11.2/bin/cassandra & apache-cassandra-3.11.2/bin/cqlsh",
+	 "rm -rf apache-cassandra-3.11.2-bin.tar.gz"
+    ]
+  }]
+	
+}
