@@ -131,7 +131,7 @@ public class CityService {
         GraphBuilder<Long, BigDecimal> graphBuilder = GraphBuilder.create();
 
         cityEntities.stream().forEach(cityEntity -> graphBuilder.connect(cityEntity.getCityEntityPrimaryKey().getId())
-                .to(cityEntity.getCityEntityPrimaryKey().getDestinationId()));
+                .to(cityEntity.getCityEntityPrimaryKey().getDestinationId()).withEdge(cityEntity.getDistance()));
 
         return graphBuilder.createDirectedGraph();
     }
@@ -141,7 +141,6 @@ public class CityService {
     }
 
     private Boolean validatePath(List<?> path, Long originId, Long destinationId) {
-
         String idPath = path.toString().replaceAll("\\[|\\]", "");
         return idPath.startsWith(originId.toString()) && idPath.endsWith(destinationId.toString())
                 && !(originId == destinationId);

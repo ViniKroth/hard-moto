@@ -5,7 +5,6 @@ CREATE KEYSPACE hardmoto
   };
 
 
-
 CREATE TABLE hardmoto.city (
    id varint,
    name text,

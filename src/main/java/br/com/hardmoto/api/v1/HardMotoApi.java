@@ -29,7 +29,7 @@ public class HardMotoApi {
     private final Logger logger = (Logger) appContext.getBean("logger");
     private final ModelMapper modelMapper = (ModelMapper) appContext.getBean("modelMapper");
     public static final String ADD = "ADD";
-    public static final String UPT= "UPT";
+    public static final String UPT = "UPT";
     public static final String DEL = "DEL";
 
 
@@ -78,6 +78,11 @@ public class HardMotoApi {
                 case DEL:
                     delete(city, apiResponses);
                     break;
+                default:
+                    apiResponses.add(new ApiResponse(Status.BAD_REQUEST.getReasonPhrase(),
+                            Status.BAD_REQUEST.getStatusCode(), String.format("Invalid given operation: %s", operation)));
+                    logger.log(Level.SEVERE, String.format("City of id: %d and destination_id: %d have invalid operation:. " +
+                            "Error: %s.", cityInput.getId(), cityInput.getDestinationId(), operation));
             }
         });
 
