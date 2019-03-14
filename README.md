@@ -32,8 +32,8 @@ Afterwards, it was time for the development. Unfortunately, I was not able to ac
 - All endpoints
 - Cassandra
 - Running on Jetty (Standalone)
-- AWS
-- Packer
+- AWS (Partially)
+- Packer (Partially)
 
 # Room for Improvement:
 - Packer -> Complete using
